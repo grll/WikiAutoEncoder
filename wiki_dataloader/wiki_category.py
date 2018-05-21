@@ -1,5 +1,7 @@
 import requests
-from data_helpers import batch
+import pickle
+from time import sleep
+from . import helpers
 
 class WikiCategory:
     """Represent and fetch all articles related to a specific wikipedia Category.
@@ -20,9 +22,9 @@ class WikiCategory:
     def __init__(self, category_str, n=1000):
         """Initialize the wikipedia Category defined by the `category_str` query string.
 
-        Initialize all the Attributes. Fetch pages immediatly accessible under the `category_str`
-        using the `fetch_pageids` method. Fetch all the subcategories for the given category using
-        the `fetch_subcategories` method.
+        Initialize all the Attributes and fetch pages that are immediatly accessible under the
+        `category_str` using the `fetch_pageids` method. Fetch all the subcategories for the given
+        category using the `fetch_subcategories` method.
 
         Args:
             category_str (str): Query string used to fetch the wikipedia Category.
@@ -96,7 +98,7 @@ class WikiCategory:
         batches of 20 articles as it is the limit on the wikipedia API.
 
         """
-        for pageids in batch(self.pageids, 20):
+        for pageids in helpers.batch(self.pageids, 20):
             payload = {
                 'action': 'query',
                 'format': 'json',
@@ -108,9 +110,17 @@ class WikiCategory:
             data = requests.get(WikiCategory.BASE_URL + "/w/api.php", payload).json()
             for pageid in pageids:
                 txt = data['query']['pages'][str(pageid)]['extract']
-                # perform some quick data cleaning
                 txt = txt.replace('\t', '').replace('\n', '').strip()
                 self.texts.append(txt)
+            
+            sleep(1) # avoid overloading the API.
+
+    def save_to_file(self):
+        """Save the Category `texts` attribute as a pickle on the filesystem."""
+        filename = self.category_str.replace('Category:', '')
+        with open('./pickles/' + filename + '.pickle', 'wb') as f:
+            pickle.dump(self.texts, f)
+
 
 if __name__ == "__main__":
     physics = WikiCategory('Category:Physics')
