@@ -1,6 +1,6 @@
 import random
 import pickle
-from . import wiki_category
+from .wiki_category import WikiCategory
 
 class WikiDataLoader:
     """Handle data loading and saving of articles from multiple wikipedia category.
@@ -60,7 +60,7 @@ class WikiDataLoader:
             print("Retrieved from file.")
         except (OSError, IOError):
             print("Querying wikipedia API...")
-            category = wiki_category.WikiCategory(category_str)
+            category = WikiCategory(category_str)
             category.fetch_all_pageids()
             category.fetch_all_text()
             category.save_to_file()

@@ -1,3 +1,3 @@
-from wiki_dataloader import wiki_dataloader
+from wiki_dataloader.wiki_dataloader import WikiDataLoader
 
-wdl = wiki_dataloader.WikiDataLoader(5)
+wdl = WikiDataLoader(5)
