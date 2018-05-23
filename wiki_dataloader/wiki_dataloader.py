@@ -53,18 +53,15 @@ class WikiDataLoader:
         Args:
             category_str (str): Query string representing the category.
         """
-        print("Loading " + category_str + "...")
         filename = category_str.replace('Category:', '')
         try:
             texts = pickle.load(open('./pickles/' + filename + '.pickle', "rb"))
-            print("Retrieved from file.")
+            print(category_str + " retrieved from file!")
         except (OSError, IOError):
-            print("Querying wikipedia API...")
             category = WikiCategory(category_str)
             category.fetch_all_pageids()
             category.fetch_all_text()
             category.save_to_file()
-            print("Done and saved on filesystem for reuse.")
             texts = category.texts
 
         self.data.append({

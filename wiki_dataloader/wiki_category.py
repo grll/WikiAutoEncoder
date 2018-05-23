@@ -98,6 +98,7 @@ class WikiCategory:
         batches of 20 articles as it is the limit on the wikipedia API.
 
         """
+        print("Fetching all text for " + self.category_str + " from wikipedia API...")
         for pageids in helpers.batch(self.pageids, 20):
             payload = {
                 'action': 'query',
@@ -114,13 +115,15 @@ class WikiCategory:
                 self.texts.append(txt)
             
             sleep(1) # avoid overloading the API.
+        print("Done!")
 
     def save_to_file(self):
         """Save the Category `texts` attribute as a pickle on the filesystem."""
+        print("Saving on filesystem for reuse...")
         filename = self.category_str.replace('Category:', '')
         with open('./pickles/' + filename + '.pickle', 'wb') as f:
             pickle.dump(self.texts, f)
-
+        print("Done!")
 
 if __name__ == "__main__":
     physics = WikiCategory('Category:Physics')
