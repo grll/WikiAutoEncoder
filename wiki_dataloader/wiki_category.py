@@ -7,12 +7,12 @@ class WikiCategory:
     """Represent and fetch all articles related to a specific wikipedia Category.
 
     Attributes:
-        category_str (str):             Used to query the wikipedia Category.
-        pageids (List[int]):            Store the already fetched pageids.
-        texts (List[str]):              Store the extracted texts corresponding to the pageids.
-        subcategories_str (List[str]):  Store the query strings for the wikipedia subcategories.
-        payload (Dict[str, str]):       Payload used to perform queries to wikipedia API.
-        n (int):                        Number of articles to take in the wikipedia Category.
+        category_str (str):            Used to query the wikipedia Category.
+        pageids (List[int]):           Store the already fetched pageids.
+        texts (List[str]):             Store the extracted texts corresponding to the pageids.
+        subcategories_str (List[str]): Store the query strings for the wikipedia subcategories.
+        payload (Dict[str, str]):      Payload used to perform queries to wikipedia API.
+        n (int):                       Number of articles to take in the wikipedia Category.
 
     """
 
