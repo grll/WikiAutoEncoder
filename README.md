@@ -1,6 +1,6 @@
 # WikiAutoEncoder
 <hr>
-### An auto-encoder to help classify article by category on Wikipedia. (Swisscom task)
+### An auto-encoder to help classify article by category on Wikipedia.
 
 ### The Task:
 
