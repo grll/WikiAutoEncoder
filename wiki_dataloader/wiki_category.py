@@ -121,12 +121,6 @@ class WikiCategory:
         """Save the Category `texts` attribute as a pickle on the filesystem."""
         print("Saving on filesystem for reuse...")
         filename = self.category_str.replace('Category:', '')
-        with open('./pickles/' + filename + '.pickle', 'wb') as f:
+        with open('./saved_states/pickles/' + filename + '.pickle', 'wb') as f:
             pickle.dump(self.texts, f)
         print("Done!")
-
-if __name__ == "__main__":
-    physics = WikiCategory('Category:Physics')
-    physics.fetch_all_pageids()
-    physics.fetch_all_text()
-    print(physics.texts[0:5])
