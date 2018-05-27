@@ -4,7 +4,7 @@ from sklearn.metrics import confusion_matrix
 import matplotlib.pyplot as plt
 
 class Visualize:
-    """Class that implement different visualization tools and ready methods for matplotlib."""
+    """Implements different visualization methods on top of matplotlib."""
     
     def __init__(self):
         """Initialize the size of the plots."""
